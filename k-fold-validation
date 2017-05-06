@@ -1,0 +1,15 @@
+#k-fold-validation
+import pandas as pd
+
+admissions = pd.read_csv("admissions.csv")
+admissions["actual_label"] = admissions["admit"]
+admissions = admissions.drop("admit", axis=1)
+
+shuffled_index = np.random.permutation(admissions.index)
+shuffled_admissions = admissions.loc[shuffled_index]
+admissions = shuffled_admissions.reset_index()
+admissions.ix[0:128, "fold"] = 1
+admissions.ix[129:257, "fold"] = 2
+admissions.ix[258:386, "fold"] = 3
+admissions.ix[387:514, "fold"] = 4
+admissions.ix[515:644, "fold"] = 5
