@@ -4,7 +4,7 @@ from sklearn import svm, datasets
 >>> iris = datasets.load_iris()
 >>> X, y = iris.data, iris.target
 >>> clf = svm.SVC(probability=True, random_state=0)
->>> cross_val_score(clf, X, y, scoring='neg_log_loss') 
+>>> cross_val_score(clf, X, y, scoring='neg_log_loss',cv=''/k-fold or etc.) 
 array([-0.07..., -0.16..., -0.06...])
 >>> model = svm.SVC()
 >>> cross_val_score(model, X, y, scoring='')
