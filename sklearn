@@ -1,0 +1,31 @@
+  sklearn
+from sklearn import svm, datasets
+>>> from sklearn.model_selection import cross_val_score
+>>> iris = datasets.load_iris()
+>>> X, y = iris.data, iris.target
+>>> clf = svm.SVC(probability=True, random_state=0)
+>>> cross_val_score(clf, X, y, scoring='neg_log_loss') 
+array([-0.07..., -0.16..., -0.06...])
+>>> model = svm.SVC()
+>>> cross_val_score(model, X, y, scoring='')
+
+Scoring	Function	Comment
+Classification	 	 
+‘accuracy’	  metrics.accuracy_score	 
+‘average_precision’	  metrics.average_precision_score	 
+‘f1’	  metrics.f1_score	for binary targets
+‘f1_micro’	  metrics.f1_score	micro-averaged
+‘f1_macro’	  metrics.f1_score	macro-averaged
+‘f1_weighted’	  metrics.f1_score	weighted average
+‘f1_samples’	  metrics.f1_score	by multilabel sample
+‘neg_log_loss’	  metrics.log_loss	requires predict_proba support
+‘precision’  etc.	metrics.precision_score	suffixes apply as with ‘f1’
+‘recall’  etc.	metrics.recall_score	suffixes apply as with ‘f1’
+‘roc_auc’	  metrics.roc_auc_score	 
+Clustering	 	 
+‘adjusted_rand_score’	  metrics.adjusted_rand_score	 
+Regression	 	 
+‘neg_mean_absolute_error’	  metrics.mean_absolute_error	 
+‘neg_mean_squared_error’	  metrics.mean_squared_error	 
+‘neg_median_absolute_error’	  metrics.median_absolute_error	 
+‘r2’	  metrics.r2_score
