@@ -1,13 +1,16 @@
   sklearn
-from sklearn import svm, datasets
->>> from sklearn.model_selection import cross_val_score
->>> iris = datasets.load_iris()
->>> X, y = iris.data, iris.target
->>> clf = svm.SVC(probability=True, random_state=0)
->>> cross_val_score(clf, X, y, scoring='neg_log_loss',cv=''/k-fold or etc.) 
-array([-0.07..., -0.16..., -0.06...])
->>> model = svm.SVC()
->>> cross_val_score(model, X, y, scoring='')
+from sklearn.cross_validation import KFold
+from sklearn.cross_validation import cross_val_score
+admissions = pd.read_csv("admissions.csv")
+admissions["actual_label"] = admissions["admit"]
+admissions = admissions.drop("admit", axis=1)
+kf=KFold(len(admissions),5,shuffle=True,random_state=8)
+lr=LogisticRegression()
+accuracies=cross_val_score(lr,admissions[["gpa"]],admissions["actual_label"],scoring='accuracy',cv=kf)
+average_accuracy=np.mean(accuracies)
+print(accuracies,average_accuracy)
+
+
 
 Scoring	Function	Comment
 Classification	 	 
@@ -29,3 +32,15 @@ Regression
 ‘neg_mean_squared_error’	  metrics.mean_squared_error	 
 ‘neg_median_absolute_error’	  metrics.median_absolute_error	 
 ‘r2’	  metrics.r2_score
+
+
+
+from sklearn import svm, datasets
+>>> from sklearn.model_selection import cross_val_score
+>>> iris = datasets.load_iris()
+>>> X, y = iris.data, iris.target
+>>> clf = svm.SVC(probability=True, random_state=0)
+>>> cross_val_score(clf, X, y, scoring='neg_log_loss',cv=''/k-fold or etc.) 
+array([-0.07..., -0.16..., -0.06...])
+>>> model = svm.SVC()
+>>> cross_val_score(model, X, y, scoring='')
