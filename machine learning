@@ -1,0 +1,41 @@
+pandas
+Dataframe. shape[0]
+Dataframe. shape[1]
+
+Dataframe.plot (scatter)
+Series.plot (hist)||Series.hist(bins, range)
+from pandas.tools.plotting import scatter_matrix
+Dataframe.plot.bar
+Axes.boxplot
+ax.tick_params
+ax.spines[“”].set_visible
+(/255,/255,/255)
+line width
+ax.text(x,y,name)
+ax.axhline(y, color, alpha)
+
+sns.kdeplot()
+sns.distplot()
+sns.set_style()
+sns.despine()
+
+# Condition on unique values of the "Survived" column.
+g = sns.FacetGrid(titanic, col="Survived", size=6)
+# For each subset of values, generate a kernel density plot of the "Age" columns.
+g.map(sns.kdeplot, "Age", shade=True)
+g.map(sns.kdeplot, "Age", shade=True).add_legend()
+
+condensing
+combined=combined.fillna(combined.mean()).fillna(0)
+combined=combined.merge(data["class_size"],how="inner",on="DBN")
+correlations=combined.corr()
+
+districts=combined.groupby("school_dist").agg(numpy.mean)
+districts.reset_index(inplace=True)
+star_wars.columns
+series.map—{}
+star_wars = star_wars.rename(columns={
+    "Which of the following Star Wars films have you seen? Please select all that apply.": "seen_1"
+})
+filtered_cars["horsepower"]=filtered_cars["horsepower"].astype(float)
+cars.plot.scatter(x="weight",y="mpg",ax=plot1)
