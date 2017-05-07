@@ -1,0 +1,35 @@
+import pandas as pd
+cars = pd.read_csv("auto.csv")
+unique_regions=cars["origin"].unique()
+print(unique_regions)
+dummy_cylinders = pd.get_dummies(cars["cylinders"], prefix="cyl")
+cars = pd.concat([cars, dummy_cylinders], axis=1)
+dummy_years=pd.get_dummies(cars["year"],prefix="year")
+cars = pd.concat([cars,dummy_years],axis=1)
+cars=cars.drop(["year","cylinders"],axis=1)
+print(cars.head())
+shuffled_rows = np.random.permutation(cars.index)
+shuffled_cars = cars.iloc[shuffled_rows]
+train=shuffled_cars.iloc[:274]
+test=shuffled_cars.iloc[274:]
+from sklearn.linear_model import LogisticRegression
+unique_origins = cars["origin"].unique()
+unique_origins.sort()
+models={}
+for i in unique_origins:
+    train_x=train.loc[:,"cyl_3":]
+    train_y=train["origin"]==i
+    lr=LogisticRegression()
+    lr.fit(train_x,train_y)
+    models[i]=lr
+print(models)
+testing_probs = pd.DataFrame(columns=unique_origins)
+for i in unique_origins:
+    testing_probs[i]=models[i].predict_proba(test.loc[:,"cyl_3":])[:,1]
+print(testing_probs)
+predicted_origins=testing_probs.idxmax(axis=1)
+print(predicted_origins)
+test=test.reset_index()
+filters=(predicted_origins==test["origin"])
+true_predict=test[filters]
+print(len(true_predict)/len(test))
