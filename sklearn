@@ -10,6 +10,9 @@ accuracies=cross_val_score(lr,admissions[["gpa"]],admissions["actual_label"],sco
 average_accuracy=np.mean(accuracies)
 print(accuracies,average_accuracy)
 
+对训练集和测试集的划分
+train=bike_rentals.sample(frac=.8)
+test=bike_rentals.loc[~bike_rentals.index.isin(train.index)]
 
 
 Scoring	Function	Comment
