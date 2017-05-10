@@ -1,0 +1,12 @@
+names=["education","marital_status","occupation","relationship","race","sex","native_country", "high_income"]
+for name in names:
+    income[name] = pandas.Categorical.from_array(income[name]).codes
+对非数值特征进行数值转化
+from sklearn.ensemble import RandomForestClassifier
+
+clf = RandomForestClassifier(n_estimators=150, random_state=1, min_samples_leaf=2)
+
+clf.fit(train[columns], train["high_income"])
+
+predictions = clf.predict(test[columns])
+print(roc_auc_score(test["high_income"], predictions))

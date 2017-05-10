@@ -1,4 +1,0 @@
-names=["education","marital_status","occupation","relationship","race","sex","native_country", "high_income"]
-for name in names:
-    income[name] = pandas.Categorical.from_array(income[name]).codes
-对非数值特征进行数值转化
